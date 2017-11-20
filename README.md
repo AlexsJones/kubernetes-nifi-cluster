@@ -10,7 +10,7 @@ However, there is customisation in two areas
 
 ## Requirements
 
-- Requires [zookeeper] running in the namespace zookeeper (three nodes referenced in the sts)
+- Requires [zookeeper](https://github.com/AlexsJones/kubernetes-zookeeper-cluster) running in the namespace zookeeper (three nodes referenced in the sts)
 
 
 ## Usage
