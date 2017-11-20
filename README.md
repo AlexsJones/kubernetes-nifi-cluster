@@ -12,7 +12,6 @@ However, there is customisation in two areas
 
 - Requires [zookeeper] running in the namespace zookeeper (three nodes referenced in the sts)
 
-- Golang and the tool `vortex` fetch with `go get github.com/AlexsJones/vortex`
 
 ## Usage
 
