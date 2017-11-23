@@ -50,10 +50,7 @@ spec:
               value: "yes"
             - name: BANNER_TEXT
               value: "Beamery Nifi"
-            # TODO; better way of adding hosts dynamically
-            # - name: HOST_ADD
-            #   value: "nifi-0.nifi.nifi.svc.cluster.local nifi-1, nifi-1.nifi.nifi.svc.cluster.local nifi-1, nifi-2.nifi.nifi.svc.cluster.local nifi-2"
-
+              
   volumeClaimTemplates:
   - metadata:
       name: flowfilerepository
