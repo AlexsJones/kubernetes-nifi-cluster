@@ -12,6 +12,8 @@ However, there is customisation in two areas
 
 - Requires [zookeeper](https://github.com/AlexsJones/kubernetes-zookeeper-cluster) running in the namespace zookeeper (three nodes referenced in the sts)
 
+- [Vortex](https://github.com/AlexsJones/vortex) For interpolating build commands
+
 
 ## Usage
 
