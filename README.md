@@ -28,6 +28,8 @@ kubectl create -f service.yaml --namespace=zookeeper
 kubectl create ns nifi
 kubectl create -f statefulset/ --namespace=nifi
 ```
+
+![nifi](https://i.imgur.com/pK3pulW.jpg)
 ---
 
 ## Issues
