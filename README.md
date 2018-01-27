@@ -29,7 +29,7 @@ kubectl create ns nifi
 kubectl create -f statefulset/ --namespace=nifi
 ```
 
-![nifi](https://i.imgur.com/pK3pulW.jpg)
+![nifi](https://i.imgur.com/dsEhgkC.jpg)
 ---
 
 ## Issues
