@@ -6,7 +6,7 @@ However, there is customisation in two areas
 - This is run as a kubernetes statefulset with persistent volume claims
 - Host mapping is done on pod start to correctly add IP addresses (zookeeper returns the hostname not the full .service.cluster.local)
 
-_Secure SSL Cluster guide coming soon_
+## _Secure SSL Cluster guide coming soon_
 
 
 ### Requirements
