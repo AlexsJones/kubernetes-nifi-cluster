@@ -2,8 +2,6 @@
 
 Three node nifi cluster running in kubernetes-nifi-cluster
 
-Based on the image: https://hub.docker.com/r/xemuliam/nifi/
-
 However, there is customisation in two areas
 - This is run as a kubernetes statefulset with persistent volume claims
 - Host mapping is done on pod start to correctly add IP addresses (zookeeper returns the hostname not the full .service.cluster.local)
