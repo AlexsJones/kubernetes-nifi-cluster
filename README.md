@@ -2,9 +2,7 @@
 
 Three node nifi cluster running in kubernetes-nifi-cluster
 
-However, there is customisation in two areas
-- This is run as a kubernetes statefulset with persistent volume claims
-- Host mapping is done on pod start to correctly add IP addresses (zookeeper returns the hostname not the full .service.cluster.local)
+I've recently simplified so any additional nodes (higher than 5) only need to be defined in `run.sh`
 
 ## _Secure SSL Cluster guide coming soon_
 
@@ -25,11 +23,9 @@ kubectl create -f micro/statefulset.yaml --namespace=zookeeper
 kubectl create -f service.yaml --namespace=zookeeper
 
 # from the nifi repo run the following
-kubectl create ns nifi
-kubectl create -f statefulset/ --namespace=nifi
+./deploy.sh
 ```
 
-![nifi](https://i.imgur.com/dsEhgkC.jpg)
 ---
 
 ## Issues
