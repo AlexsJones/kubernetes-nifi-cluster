@@ -1,10 +1,10 @@
 # kubernetes-nifi-cluster
 
-Three node nifi cluster running in kubernetes-nifi-cluster
+A nifi cluster running in kubernetes-nifi-cluster
 
-I've recently simplified so any additional nodes (higher than 5) only need to be defined in `run.sh`
+## _Updated March 2018_
 
-## _Secure SSL Cluster guide coming soon_
+### _Secure SSL Cluster guide coming soon_
 
 
 ### Requirements
@@ -34,12 +34,11 @@ The primary issue that causes all of the headaches with scaling and getting this
 
 ### Add nodes
 
-Currently the easiest way would be to rebuild the docker image due to the issue with the
-*This also means scaling is an issue currently*
+Currently the easiest way would to add to the configmap that holds the shell launcher
 
-`https://github.com/AlexsJones/kubernetes-nifi-cluster/blob/master/files/run.sh#L9`
+`https://github.com/AlexsJones/kubernetes-nifi-cluster/blob/master/statefulset/nifi-bootstrap.yaml`
 
-Here you'll have to add the new node.
+Here you'll have to add the new node (or you could write a for loop and generate as many as you'll ever need)...
 
 ### Production readiness
 
