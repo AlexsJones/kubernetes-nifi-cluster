@@ -1,0 +1,3 @@
+[submodule "kubernetes-zookeeper-cluster"]
+	path = kubernetes-zookeeper-cluster
+	url = https://github.com/AlexsJones/kubernetes-zookeeper-cluster.git

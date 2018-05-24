@@ -2,27 +2,19 @@
 
 A nifi cluster running in kubernetes-nifi-cluster
 
-## _Updated March 2018_
-
-### _Secure SSL Cluster guide coming soon_
-
+_Updated deployment steps now added_
 
 ### Requirements
 
 
-- Requires [zookeeper](https://github.com/AlexsJones/kubernetes-zookeeper-cluster) running in the namespace zookeeper (three nodes referenced in the sts)
+- Requires `go get github.com/AlexsJones/vortex` This is a lightweight alternative to helm.
 
+- Requires the `kubernetes-zookeeper-cluster` submodule to be fetched.
 
 ### Usage
 ```
-# https://github.com/AlexsJones/kubernetes-zookeeper-cluster
-# from this repo run
-kubectl create ns zookeeper
-kubectl create -f poddisruptionbudget.yaml --namespace=zookeeper
-kubectl create -f micro/statefulset.yaml --namespace=zookeeper
-kubectl create -f service.yaml --namespace=zookeeper
-
-# from the nifi repo run the following
+# For ease of use just run the deploy.sh
+# I have rolled into it the zookeeper commands for ease of use.
 ./deploy.sh
 ```
 
