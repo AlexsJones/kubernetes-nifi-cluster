@@ -34,13 +34,11 @@ The primary issue that causes all of the headaches with scaling and getting this
 
 ### Add nodes
 
-Currently the easiest way would to add to the configmap that holds the shell launcher
-
-`https://github.com/AlexsJones/kubernetes-nifi-cluster/blob/master/statefulset/nifi-bootstrap.yaml`
-
-Here you'll have to add the new node (or you could write a for loop and generate as many as you'll ever need)...
+Currently the easiest way would to add to the run command in the statefulset
 
 ### Production readiness
+
+I will eventually write a guide for SSL but its a real pain in the ass (keystore/truststore dynamic generation and sharing.)
 
 Apart from the scaling issue I'd recommend upping the persistent volume claim size.
 Ideally I'd find a solution for the dynamic node situation, but I haven't found any other Nifi K8s manifests let alone covering this issue just yet.
