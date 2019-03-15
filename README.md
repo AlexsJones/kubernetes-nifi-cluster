@@ -28,6 +28,10 @@ kubectl create -f service.yaml --namespace=zookeeper
 
 ---
 
+## UI
+
+http://<LB_IP>:8080/nifi/
+
 ## Issues
 
 The primary issue that causes all of the headaches with scaling and getting this all working is to do with the way Kubernetes statefulsets are unable to resolve each other via dns. At time of writing this its not possible for one statefulset pod to see another; this essentially means unless you're doing FQDN via external DNS and back-in, you'll have to use the solution I've come up with (happy for other suggestions - perhaps some proxy service or side car).

@@ -25,7 +25,7 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: nifi
-          image: xemuliam/nifi:1.4.0
+          image: xemuliam/nifi:latest
           command:
             - "/bin/sh"
             - "-ec"
@@ -58,7 +58,8 @@ spec:
               mountPath: /opt/nifi/provenance_repository
           env:
             - name: ZK_NODES_LIST
-              value: "zk-0.zk-hs.zookeeper.svc.cluster.local,zk-1.zk-hs.zookeeper.svc.cluster.local,zk-2.zk-hs.zookeeper.svc.cluster.local"
+              # Requires zookeeper running
+              value: "zk-0.zk-hs.zk.svc.cluster.local,zk-1.zk-hs.zk.svc.cluster.local,zk-2.zk-hs.zk.svc.cluster.local"
             - name: ZK_MONITOR_PORT
               value: "2888"
             - name: IS_CLUSTER_NODE
