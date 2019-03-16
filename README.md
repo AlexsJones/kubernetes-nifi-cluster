@@ -1,6 +1,6 @@
 # kubernetes-nifi-cluster
 
-A nifi cluster running in kubernetes-nifi-cluster
+A nifi cluster running in kubernetes
 
 ## Major update March2019
 
