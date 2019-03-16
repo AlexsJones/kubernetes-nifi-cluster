@@ -2,28 +2,33 @@
 
 A nifi cluster running in kubernetes-nifi-cluster
 
-## _Updated March 2018_
+## Major update March2019
 
-### _Secure SSL Cluster guide coming soon_
+_Secure SSL Cluster guide coming soon_
 
+### Prerequisites
 
-### Requirements
+- Requires [vortex](https://github.com/AlexsJones/vortex)
+  - Requires golang installed and on the path
+  - Can be installed with `go get github.com/AlexsJones/vortex`
 
+- Requires [zookeeper](https://github.com/AlexsJones/kubernetes-zookeeper-cluster)
 
-- Requires [zookeeper](https://github.com/AlexsJones/kubernetes-zookeeper-cluster) running in the namespace zookeeper (three nodes referenced in the sts)
+from the zookeeper repo repo run:
+```
+kubectl create ns zk
+kubectl create -f poddisruptionbudget.yaml --namespace=zk
+kubectl create -f micro/statefulset.yaml --namespace=zk
+kubectl create -f service.yaml --namespace=zk
+```
 
+Now zookeeper is setup with three nodes on the zk namespace you are ready!
 
 ### Usage
-```
-# https://github.com/AlexsJones/kubernetes-zookeeper-cluster
-# from this repo run
-kubectl create ns zookeeper
-kubectl create -f poddisruptionbudget.yaml --namespace=zookeeper
-kubectl create -f micro/statefulset.yaml --namespace=zookeeper
-kubectl create -f service.yaml --namespace=zookeeper
 
-# from the nifi repo run the following
-./deploy.sh
+```
+./build_environment.sh default
+kubectl create -f deployment/
 ```
 
 ---
@@ -32,13 +37,11 @@ kubectl create -f service.yaml --namespace=zookeeper
 
 http://<LB_IP>:8080/nifi/
 
-## Issues
 
-The primary issue that causes all of the headaches with scaling and getting this all working is to do with the way Kubernetes statefulsets are unable to resolve each other via dns. At time of writing this its not possible for one statefulset pod to see another; this essentially means unless you're doing FQDN via external DNS and back-in, you'll have to use the solution I've come up with (happy for other suggestions - perhaps some proxy service or side car).
+## Configuration
 
-### Add nodes
-
-Currently the easiest way would to add to the run command in the statefulset
+The `environments/` folder can have new files added and used with `build_environment.sh <envname>` and those values interpolated
+For more informatino on this please see [here](https://github.com/AlexsJones/vortex/blob/master/README.md)
 
 ### Production readiness
 

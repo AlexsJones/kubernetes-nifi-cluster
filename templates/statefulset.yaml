@@ -4,7 +4,7 @@ metadata:
   name: nifi
 spec:
   serviceName: nifi
-  replicas: 3
+  replicas: {{.replicas}}
   podManagementPolicy: Parallel
   updateStrategy:
     type: RollingUpdate
@@ -25,22 +25,7 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: nifi
-          image: xemuliam/nifi:latest
-          command:
-            - "/bin/sh"
-            - "-ec"
-            - |
-              echo "Waiting to run nslookup..."
-              sleep 30
-              echo `nslookup nifi | sed -e 's/Address.*://' | tail -n +3` | sed -e 's/l /l\n/g' >>  /tmphosts
-              sed -i 's/nifi-0.nifi.nifi.svc.cluster.local/nifi-0.nifi.nifi.svc.cluster.local nifi-0/g' /tmphosts
-              sed -i 's/nifi-1.nifi.nifi.svc.cluster.local/nifi-1.nifi.nifi.svc.cluster.local nifi-1/g' /tmphosts
-              sed -i 's/nifi-2.nifi.nifi.svc.cluster.local/nifi-2.nifi.nifi.svc.cluster.local nifi-2/g' /tmphosts
-              sed -i 's/nifi-3.nifi.nifi.svc.cluster.local/nifi-3.nifi.nifi.svc.cluster.local nifi-3/g' /tmphosts
-              sed -i 's/nifi-4.nifi.nifi.svc.cluster.local/nifi-4.nifi.nifi.svc.cluster.local nifi-4/g' /tmphosts
-              sed -i 's/nifi-5.nifi.nifi.svc.cluster.local/nifi-5.nifi.nifi.svc.cluster.local nifi-5/g' /tmphosts
-              cat /tmphosts >> /etc/hosts
-              ./start_nifi.sh
+          image: {{.image}}
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

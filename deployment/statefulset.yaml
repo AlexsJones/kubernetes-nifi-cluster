@@ -1,0 +1,87 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: nifi
+spec:
+  serviceName: nifi
+  replicas: 3
+  podManagementPolicy: Parallel
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: nifi
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                    - nifi
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: nifi
+          image: xemuliam/nifi:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+            - containerPort: 8081
+            - containerPort: 8443
+            - containerPort: 2882
+          volumeMounts:
+            - name: flowfilerepository
+              mountPath: /opt/nifi/flowfile_repository
+            - name: databaserepository
+              mountPath: /opt/nifi/database_repository
+            - name: contentrepository
+              mountPath: /opt/nifi/content_repository
+            - name: provenancerepository
+              mountPath: /opt/nifi/provenance_repository
+          env:
+            - name: ZK_NODES_LIST
+              # Requires zookeeper running
+              value: "zk-0.zk-hs.zk.svc.cluster.local,zk-1.zk-hs.zk.svc.cluster.local,zk-2.zk-hs.zk.svc.cluster.local"
+            - name: ZK_MONITOR_PORT
+              value: "2888"
+            - name: IS_CLUSTER_NODE
+              value: "yes"
+            - name: BANNER_TEXT
+              value: "Nifi Cluster"
+
+  volumeClaimTemplates:
+  - metadata:
+      name: flowfilerepository
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 5Gi
+      storageClassName: standard
+  - metadata:
+      name: databaserepository
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 5Gi
+      storageClassName: standard
+  - metadata:
+      name: contentrepository
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 5Gi
+      storageClassName: standard
+  - metadata:
+      name: provenancerepository
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 5Gi
+      storageClassName: standard

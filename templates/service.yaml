@@ -1,0 +1,37 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nifi-http
+spec:
+  type: LoadBalancer
+  selector:
+    app: nifi
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      name: nifi
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: nifi
+spec:
+  clusterIP: None
+  selector:
+    app: nifi
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081
+      name: nifi-listen-http
+    - protocol: TCP
+      port: 2881
+      targetPort: 2881
+      name: nifi-site-protocol
+    - protocol: TCP
+      port: 2882
+      targetPort: 2882
+      name: nifi-node-protocol
