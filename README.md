@@ -54,7 +54,7 @@ nifi-http   LoadBalancer   10.59.252.26   35.193.200.235                       8
 
 ## UI
 
-http://<LB_IP>:8080/nifi/
+`http://<LB_IP>:8080/nifi/`
 
 
 ## Configuration
