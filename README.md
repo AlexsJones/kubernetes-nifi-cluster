@@ -24,11 +24,30 @@ kubectl create -f service.yaml --namespace=zk
 
 Now zookeeper is setup with three nodes on the zk namespace you are ready!
 
-### Usage
+## Deploy Nifi
 
 ```
 ./build_environment.sh default
 kubectl create -f deployment/
+```
+
+Once running you should see...
+```
+kubectl get pods -n nifi 
+NAME      READY     STATUS    RESTARTS   AGE
+nifi-0    1/1       Running   0          25m
+nifi-1    1/1       Running   0          25m
+nifi-2    1/1       Running   0          25m
+
+kubectl get svc -n nifi                
+NAME        TYPE           CLUSTER-IP     EXTERNAL-IP                          PORT(S)                      AGE
+nifi        ClusterIP      None           <none>                               8081/TCP,2881/TCP,2882/TCP   1d
+nifi-0      ExternalName   <none>         nifi-0.nifi.nifi.svc.cluster.local   <none>                       27m
+nifi-1      ExternalName   <none>         nifi-1.nifi.nifi.svc.cluster.local   <none>                       27m
+nifi-2      ExternalName   <none>         nifi-2.nifi.nifi.svc.cluster.local   <none>                       27m
+nifi-3      ExternalName   <none>         nifi-3.nifi.nifi.svc.cluster.local   <none>                       26m
+nifi-4      ExternalName   <none>         nifi-4.nifi.nifi.svc.cluster.local   <none>                       27m
+nifi-http   LoadBalancer   10.59.252.26   35.193.200.235                       8080:31995/TCP               1d
 ```
 
 ---
