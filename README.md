@@ -8,6 +8,7 @@ _Secure SSL Cluster guide coming soon_
 
 ### Prerequisites
 
+- This example is using Google Cloud Platform persistent volumes for its backing store (easy to convert to AWS).
 - Requires [vortex](https://github.com/AlexsJones/vortex)
   - Requires golang installed and on the path
   - Can be installed with `go get github.com/AlexsJones/vortex`
@@ -48,6 +49,21 @@ nifi-2      ExternalName   <none>         nifi-2.nifi.nifi.svc.cluster.local   <
 nifi-3      ExternalName   <none>         nifi-3.nifi.nifi.svc.cluster.local   <none>                       26m
 nifi-4      ExternalName   <none>         nifi-4.nifi.nifi.svc.cluster.local   <none>                       27m
 nifi-http   LoadBalancer   10.59.252.26   35.193.200.235                       8080:31995/TCP               1d
+
+kubectl get pvc -n nifi
+NAME                          STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+contentrepository-nifi-0      Bound     pvc-c00b39d5-4710-11e9-b1b0-42010a800055   5Gi        RWO            standard       1d
+contentrepository-nifi-1      Bound     pvc-c0116c25-4710-11e9-b1b0-42010a800055   5Gi        RWO            standard       1d
+contentrepository-nifi-2      Bound     pvc-c019d7ee-4710-11e9-b1b0-42010a800055   5Gi        RWO            standard       1d
+databaserepository-nifi-0     Bound     pvc-c00a3682-4710-11e9-b1b0-42010a800055   5Gi        RWO            standard       1d
+databaserepository-nifi-1     Bound     pvc-c00f87a8-4710-11e9-b1b0-42010a800055   5Gi        RWO            standard       1d
+databaserepository-nifi-2     Bound     pvc-c017dbe4-4710-11e9-b1b0-42010a800055   5Gi        RWO            standard       1d
+flowfilerepository-nifi-0     Bound     pvc-c0096aac-4710-11e9-b1b0-42010a800055   5Gi        RWO            standard       1d
+flowfilerepository-nifi-1     Bound     pvc-c00df6bb-4710-11e9-b1b0-42010a800055   5Gi        RWO            standard       1d
+flowfilerepository-nifi-2     Bound     pvc-c016020d-4710-11e9-b1b0-42010a800055   5Gi        RWO            standard       1d
+provenancerepository-nifi-0   Bound     pvc-c008b6bd-4710-11e9-b1b0-42010a800055   5Gi        RWO            standard       1d
+provenancerepository-nifi-1   Bound     pvc-c0132c86-4710-11e9-b1b0-42010a800055   5Gi        RWO            standard       1d
+provenancerepository-nifi-2   Bound     pvc-c01aec6b-4710-11e9-b1b0-42010a800055   5Gi        RWO            standard       1d
 ```
 
 ---
