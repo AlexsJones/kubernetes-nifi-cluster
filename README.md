@@ -17,18 +17,22 @@ _Secure SSL Cluster guide coming soon_
 
 from the zookeeper repo repo run:
 ```
-kubectl create ns zk
-kubectl create -f poddisruptionbudget.yaml --namespace=zk
-kubectl create -f micro/statefulset.yaml --namespace=zk
-kubectl create -f service.yaml --namespace=zk
+./build_environment.sh small
+kubectl create -f deployment/
 ```
 
 Now zookeeper is setup with three nodes on the zk namespace you are ready!
 
 ## Deploy Nifi
 
+_Make sure zk is running to avoid headaches_
+
 ```
 ./build_environment.sh default
+# Please create the nifi namespace first
+
+kubectl create ns nifi
+
 kubectl create -f deployment/
 ```
 
