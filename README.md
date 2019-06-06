@@ -1,5 +1,11 @@
 # kubernetes-nifi-cluster
 
+![forks](https://img.shields.io/github/forks/AlexsJones/kubernetes-nifi-cluster.svg)
+![stars](https://img.shields.io/github/stars/AlexsJones/kubernetes-nifi-cluster.svg)
+![license](https://img.shields.io/github/license/AlexsJones/kubernetes-nifi-cluster.svg)
+![issues](https://img.shields.io/github/issues/AlexsJones/kubernetes-nifi-cluster.svg)
+
+
 A nifi cluster running in kubernetes
 
 ## Minor update April 2019
