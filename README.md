@@ -66,6 +66,9 @@ provenancerepository-nifi-2   Bound     pvc-c01aec6b-4710-11e9-b1b0-42010a800055
 
 `http://<LB_IP>:8080/nifi/`
 
+## Scaling
+
+`kubectl scale --replicas <COUNT> sts/nifi`
 
 ## Configuration
 
