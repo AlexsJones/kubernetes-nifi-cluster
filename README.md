@@ -2,16 +2,16 @@
 
 A nifi cluster running in kubernetes
 
-## Major update March2019
+## Minor update April 2019
 
 _Secure SSL Cluster guide coming soon_
 
 ### Prerequisites
 
 - This example is using Google Cloud Platform persistent volumes for its backing store (easy to convert to AWS).
-- Requires [vortex](https://github.com/AlexsJones/vortex)
+- [vortex](https://github.com/AlexsJones/vortex) *Optional*
   - Requires golang installed and on the path
-  - Can be installed with `go get github.com/AlexsJones/vortex`
+  - Can be installed with `go get github.com/AlexsJones/vortex` 
 
 - Requires [zookeeper](https://github.com/AlexsJones/kubernetes-zookeeper-cluster)
 
@@ -44,16 +44,6 @@ nifi-0    1/1       Running   0          25m
 nifi-1    1/1       Running   0          25m
 nifi-2    1/1       Running   0          25m
 
-kubectl get svc -n nifi                
-NAME        TYPE           CLUSTER-IP     EXTERNAL-IP                          PORT(S)                      AGE
-nifi        ClusterIP      None           <none>                               8081/TCP,2881/TCP,2882/TCP   1d
-nifi-0      ExternalName   <none>         nifi-0.nifi.nifi.svc.cluster.local   <none>                       27m
-nifi-1      ExternalName   <none>         nifi-1.nifi.nifi.svc.cluster.local   <none>                       27m
-nifi-2      ExternalName   <none>         nifi-2.nifi.nifi.svc.cluster.local   <none>                       27m
-nifi-3      ExternalName   <none>         nifi-3.nifi.nifi.svc.cluster.local   <none>                       26m
-nifi-4      ExternalName   <none>         nifi-4.nifi.nifi.svc.cluster.local   <none>                       27m
-nifi-http   LoadBalancer   10.59.252.26   35.193.200.235                       8080:31995/TCP               1d
-
 kubectl get pvc -n nifi
 NAME                          STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 contentrepository-nifi-0      Bound     pvc-c00b39d5-4710-11e9-b1b0-42010a800055   5Gi        RWO            standard       1d
@@ -84,7 +74,7 @@ For more informatino on this please see [here](https://github.com/AlexsJones/vor
 
 ### Production readiness
 
-I will eventually write a guide for SSL but its a real pain in the ass (keystore/truststore dynamic generation and sharing.)
-
-Apart from the scaling issue I'd recommend upping the persistent volume claim size.
-Ideally I'd find a solution for the dynamic node situation, but I haven't found any other Nifi K8s manifests let alone covering this issue just yet.
+A checklist for consideration I would think about before you want to run this in prod
+- Use an identity aware proxy infront of the load balancer
+- Recovery procedure from the PVC's
+- Scaling, liveliness & readiness probes
