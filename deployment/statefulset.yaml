@@ -34,15 +34,6 @@ spec:
             - containerPort: 8081
             - containerPort: 8443
             - containerPort: 2882
-          volumeMounts:
-            - name: flowfilerepository
-              mountPath: /opt/nifi/flowfile_repository
-            - name: databaserepository
-              mountPath: /opt/nifi/database_repository
-            - name: contentrepository
-              mountPath: /opt/nifi/content_repository
-            - name: provenancerepository
-              mountPath: /opt/nifi/provenance_repository
           env:
             - name: ZK_NODES_LIST
               # Requires zookeeper running
@@ -53,37 +44,3 @@ spec:
               value: "yes"
             - name: BANNER_TEXT
               value: "Nifi Cluster"
-
-  volumeClaimTemplates:
-  - metadata:
-      name: flowfilerepository
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 5Gi
-      storageClassName: standard
-  - metadata:
-      name: databaserepository
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 5Gi
-      storageClassName: standard
-  - metadata:
-      name: contentrepository
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 5Gi
-      storageClassName: standard
-  - metadata:
-      name: provenancerepository
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 5Gi
-      storageClassName: standard

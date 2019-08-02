@@ -8,23 +8,30 @@
 
 A nifi cluster running in kubernetes
 
-## Minor update April 2019
+## Major update August 2019
 
 _Secure SSL Cluster guide coming soon_
 
 ### Prerequisites
 
 - This example is using Google Cloud Platform persistent volumes for its backing store (easy to convert to AWS).
-- [vortex](https://github.com/AlexsJones/vortex) *Optional*
-  - Requires golang installed and on the path
-  - Can be installed with `go get github.com/AlexsJones/vortex` 
+
+- There is no longer a requirement to install [vortex](https://github.com/AlexsJones/vortex) for interpolation.
+  - For setting up the environment run:
+
+  ```
+   docker run -v $PWD:/tmp tibbar/vortex:v1 -template /tmp/templates -output /tmp/deployment -varpath /tmp/environments/default.yaml
+  ```
+
+   This will generate your default environment
 
 - Requires [zookeeper](https://github.com/AlexsJones/kubernetes-zookeeper-cluster)
-
-from the zookeeper repo repo run:
 ```
-./build_environment.sh small
+# Assumes you've checked it out next to the nifi cluster...
+cd kubernetes-zookeeper-cluster
+docker run -v $PWD:/tmp tibbar/vortex:v1 -template /tmp/templates -output /tmp/deployment -varpath /tmp/environments/small.yaml
 kubectl create -f deployment/
+cd ../kubernetes-nifi-cluster
 ```
 
 Now zookeeper is setup with three nodes on the zk namespace you are ready!
@@ -34,8 +41,8 @@ Now zookeeper is setup with three nodes on the zk namespace you are ready!
 _Make sure zk is running to avoid headaches_
 
 ```
-./build_environment.sh default
 # Please create the nifi namespace first
+# Ensure you have run docker vortex build step mentioned above^
 
 kubectl create ns nifi
 
@@ -44,7 +51,7 @@ kubectl create -f deployment/
 
 Once running you should see...
 ```
-kubectl get pods -n nifi 
+kubectl get pods -n nifi
 NAME      READY     STATUS    RESTARTS   AGE
 nifi-0    1/1       Running   0          25m
 nifi-1    1/1       Running   0          25m
@@ -69,6 +76,11 @@ provenancerepository-nifi-2   Bound     pvc-c01aec6b-4710-11e9-b1b0-42010a800055
 ---
 
 ## UI
+
+Port forward to the UX:
+```
+kubectl port-forward nifi-0 8080:8080 -n nifi
+```
 
 `http://<LB_IP>:8080/nifi/`
 
