@@ -1,4 +1,4 @@
-# kubernetes-nifi-cluster
+# _deprecated_ kubernetes-nifi-cluster _please use https://github.com/AlexsJones/nifi_
 
 ![forks](https://img.shields.io/github/forks/AlexsJones/kubernetes-nifi-cluster.svg)
 ![stars](https://img.shields.io/github/stars/AlexsJones/kubernetes-nifi-cluster.svg)
@@ -8,9 +8,13 @@
 
 A nifi cluster running in kubernetes
 
-## Major update August 2019
+## Helm chart now available
 
-_Secure SSL Cluster guide coming soon_
+This repo is now being deprecated in favour of a Helm compatible [chart](https://github.com/AlexsJones/nifi)
+
+_I am going to appeal to add it into helm/charts as soon as my dependent zookeeper chart is added_
+
+Thank you!
 
 ### Prerequisites
 
